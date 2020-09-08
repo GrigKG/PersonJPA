@@ -1,7 +1,5 @@
 package telran.ashkelon2020.person.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import telran.ashkelon2020.person.dto.CityPopulationDTO;
 import telran.ashkelon2020.person.dto.PersonDTO;
 import telran.ashkelon2020.person.dto.UppPersonDTO;
 import telran.ashkelon2020.person.model.Person;
@@ -48,15 +47,39 @@ public class PercsonController implements PersonService {
 	}
 
 	@Override
-	@PutMapping("/allPerson/{name}")
+	@GetMapping("/allPerson/{name}")
 	public Iterable<Person> allPersonByName(@PathVariable String name) {
 		return personService.allPersonByName(name);
 	}
 
 	@Override
-	@PutMapping("agePeriod/{formAge}/{toAge}")
+	@GetMapping("/agePeriod/{formAge}/{toAge}")
 	public Iterable<Person> allPersonByAge(@PathVariable int formAge,@PathVariable int toAge) {
 		return personService.allPersonByAge(formAge, toAge);
+	}
+
+	@Override
+	@GetMapping("/city/{city}")
+	public Iterable<PersonDTO> findByCity(@PathVariable String city) {
+		return personService.findByCity(city);
+	}
+
+	@Override
+	@GetMapping("/population/city")
+	public Iterable<CityPopulationDTO> getCityPopulation() {
+		return personService.getCityPopulation();
+	}
+
+	@Override
+	@GetMapping("/salary/{min}/{max}")
+	public Iterable<PersonDTO> findEmployeeBySalary(int min, int max) {
+		return personService.findEmployeeBySalary(min, max);
+	}
+
+	@Override
+	@GetMapping("/allChildren")
+	public Iterable<PersonDTO> getChildren() {
+		return personService.getChildren();
 	}
 	
 	
