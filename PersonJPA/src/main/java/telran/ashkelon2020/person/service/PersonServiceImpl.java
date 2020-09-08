@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -128,6 +127,8 @@ public class PersonServiceImpl implements PersonService {
 
 	@Override
 	public Iterable<PersonDTO> getChildren() {
+		//return personRepository.findChildrenBy().map(p->modelMapper.map(p, PersonDTO.class)).collect(Collectors.toList());
+		
 	    Example<Child> example = Example.of(new Child());
 		return personRepository.findAll(example).stream()
 				.map(p->modelMapper.map(p, PersonDTO.class))
